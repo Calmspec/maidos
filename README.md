@@ -22,18 +22,17 @@ Maidos is a high-performance, multi-layered network stress testing and reconnais
 This guide is for Debian-based distributions (like Ubuntu, Kali Linux).
 
 **1. Clone the Repository**
-
-```bash
+```
 git clone https://github.com/Anonymous/Calmspec/maidos
-cd maidos
-
+cd maidos 
+```
 
 2. Install Python Dependencies
 
 Ensure you have Python 3.8+ and pip installed. Then, install the required libraries using the provided requirements.txt file.
-
-``pip install -r requirements.txt``
-
+`
+pip install -r requirements.txt 
+`
 Layer 3/4 - flood
 This command launches network-level flood attacks.
 
