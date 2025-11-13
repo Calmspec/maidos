@@ -6,7 +6,7 @@
 
 Maidos is a high-performance, multi-layered network stress testing and reconnaissance toolkit built in Python. It is designed for security professionals and network administrators to test the resilience of their infrastructure against various types of flood attacks and to perform advanced network analysis.
 
-<img src="GUI.jpg" alt="ScreenShot1">
+
 
 ## Key Features
 
@@ -59,8 +59,15 @@ Configuration
 You can customize Maidos's behavior by editing the files in the data/ directory.
 
 data/attack_profile.json: Define custom, multi-step Layer 7 attack sequences. You can specify different paths, methods, and weights for each request type.
+
 data/user_agents.txt: A list of User-Agent strings used in Layer 7 attacks. Add your own, one per line.
+
 data/headers.json: A list of HTTP header sets. The tool randomly chooses one for each request.
+
 proxies.txt: To use proxies with the stress command, create this file in the root directory and add your proxies (format: ip:port), one per line.
-Disclaimer
+
+
+
+DISCLAIMER
+
 This tool is intended for educational purposes and authorized security testing only. Using Maidos to attack networks or servers that you do not have explicit permission to test is illegal and unethical. The developer assumes no liability and is not responsible for any misuse of this tool.
