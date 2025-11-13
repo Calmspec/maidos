@@ -1,1 +1,1 @@
-
+query=laptop+gaming&category=electronics&sort=price_desc&in_stock=true
