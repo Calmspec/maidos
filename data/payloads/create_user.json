@@ -1,1 +1,10 @@
 
+{
+  "username": "testuser123",
+  "email": "test.user@example.com",
+  "password": "C0MPL3TETE5T12!",
+  "preferences": {
+    "theme": "dark",
+    "notifications": true
+  }
+}
