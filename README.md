@@ -39,34 +39,42 @@ This command launches network-level flood attacks.
 UDP Flood: Sends a UDP flood to the target for 120 seconds using 100 threads, with a packet size of 1400 bytes.
 
 python
+```
 python src/main.py flood -ip 192.168.1.100 -p 53 -t 100 -d 120 --method udp --size 1400
 TCP Flood: Sends a TCP connection flood to the target for 300 seconds using 200 threads.
-
+```
 python
+```
 python src/main.py flood -ip 192.168.1.100 -p 80 -t 200 -d 300 --method tcp
+```
 Network Analysis Tools
 Find Origin IP (find-origin): Attempts to find the real server IP behind a CDN like Cloudflare or ArvanCloud.
 
 python
+```
 python src/main.py find-origin -u [https://example.com](https://example.com)
+```
 Analyze DNS (check-dns):
 Gathers and analyzes DNS records for a given domain.
 
 python
+```
 python src/main.py check-dns -u example.com -c 200
-Configuration
+```
+**Configuration**
 You can customize Maidos's behavior by editing the files in the data/ directory.
 
-data/attack_profile.json: Define custom, multi-step Layer 7 attack sequences. You can specify different paths, methods, and weights for each request type.
+**data/attack_profile.json:** Define custom, multi-step Layer 7 attack sequences. You can specify different paths, methods, and weights for each request type.
 
-data/user_agents.txt: A list of User-Agent strings used in Layer 7 attacks. Add your own, one per line.
+**data/user_agents.txt:** A list of User-Agent strings used in Layer 7 attacks. Add your own, one per line.
 
-data/headers.json: A list of HTTP header sets. The tool randomly chooses one for each request.
+**data/headers.json:** A list of HTTP header sets. The tool randomly chooses one for each request.
 
-proxies.txt: To use proxies with the stress command, create this file in the root directory and add your proxies (format: ip:port), one per line.
+**proxies.txt:** To use proxies with the stress command, create this file in the root directory and add your proxies (format: ip:port), one per line.
 
 
 
-DISCLAIMER
+## DISCLAIMER
 
-This tool is intended for educational purposes and authorized security testing only. Using Maidos to attack networks or servers that you do not have explicit permission to test is illegal and unethical. The developer assumes no liability and is not responsible for any misuse of this tool.
+_This tool is intended for educational purposes and authorized security testing only. Using Maidos to attack networks or servers that you do not have explicit permission to test is illegal and unethical. The developer assumes no liability and is not responsible for any misuse of this tool.
+_
