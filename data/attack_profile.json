@@ -1,1 +1,22 @@
-
+[
+  {
+    "path": "/",
+    "method": "GET",
+    "weight": 50,
+    "description":"Cpu"
+  },
+  {
+    "path": "/?s=kir",
+    "method": "GET",
+    "random_params": true,
+    "weight": 50,
+    "description": "Search"
+  },
+  {
+    "path": "/api/users",
+    "method": "POST",
+    "payload_file": "data/payloads/create_user.json",
+    "weight": 0,
+    "description": "Sign-up"
+  }
+]
