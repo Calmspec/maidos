@@ -78,6 +78,27 @@ def load_data_files():
     print("---------------------------------\n")
     return data
 
+def get_system_capacity():
+    cpu_count = psutil.cpu_count(logical=True)
+    memory_info = psutil.virtual_memory()
+    available_memory = memory_info.available / (1024 ** 3)  # in GB
+    return cpu_count, available_memory
+
+def adjust_semaphore_limit(cpu_count, available_memory):
+    base_limit = 500
+    if cpu_count > 4 and available_memory > 8:
+        return base_limit * 2
+    elif cpu_count > 2 and available_memory > 4:
+        return base_limit
+    else:
+        return base_limit // 2
+
+def rotate_proxies(proxies):
+    return random.choice(proxies)
+
+def rotate_user_agents(user_agents):
+    return random.choice(user_agents)
+
 async def run_stress_test(args):
     base_url = None
     if args.url:
@@ -132,7 +153,10 @@ async def run_stress_test(args):
 
     start_time = time.time()
 
-    semaphore = asyncio.Semaphore(500)
+    cpu_count, available_memory = get_system_capacity()
+    semaphore_limit = adjust_semaphore_limit(cpu_count, available_memory)
+    semaphore = asyncio.Semaphore(semaphore_limit)
+
     ssl_context = None
     if args.insecure:
         ssl_context = ssl.create_default_context()
@@ -149,13 +173,14 @@ async def run_stress_test(args):
         weights = [rule.get('weight', 1) for rule in attack_profile]
 
         for _ in range(total_requests):
-            selected_proxy = random.choice(proxies) if proxies else None
+            selected_proxy = rotate_proxies(proxies) if proxies else None
+            selected_user_agent = rotate_user_agents(default_data['user_agents'])
             chosen_rule = random.choices(population, weights, k=1)[0]
 
             task = asyncio.create_task(
                 async_send_request(
                     session, base_url, default_data, selected_proxy,
-                    chosen_rule, semaphore, args.debug
+                    chosen_rule, semaphore, args.debug, selected_user_agent
                 )
             )
             tasks.append(task)
